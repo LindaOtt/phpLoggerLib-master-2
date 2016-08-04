@@ -1,7 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 require_once("Logger.php");
-
+require_once("controller\LogManager.php");
 
 function loggStuff() {
 	loggHeader("A header");
@@ -10,14 +12,17 @@ function loggStuff() {
 	loggThis("include an object", new \Exception("foo exception"), false);
 }
 
-loggStuff();
+//Try out the log manager
+$logManager = new \logger\LogManager();
+
+//loggStuff();
 
 //show log
 //do not dump superglobals
-echoLog(false);
+//echoLog(false);
 
 //show with superglobals
-echoLog();
+//echoLog();
 
 
 
