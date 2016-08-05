@@ -1,10 +1,10 @@
 <?php
 namespace logger;
 
-require_once("../model/LogCollection.php");
-require_once("../model/LogItem.php");
+require_once("./model/LogCollection.php");
+require_once("./model/LogItem.php");
 
-require_once("../view/LogView.php");
+require_once("./view/LogView.php");
 
 class LogManager {
 

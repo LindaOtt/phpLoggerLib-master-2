@@ -93,7 +93,7 @@ class LogView {
 		else 
 			$object = "";
 		list($usec, $sec) = explode(" ", microtime());
-
+        date_default_timezone_set('Europe/Stockholm');
 		$date = date("Y-m-d H:i:s", $sec);
 		$ret =  "<li>
 					<Strong>$item->m_message </strong> $item->m_calledFrom 
