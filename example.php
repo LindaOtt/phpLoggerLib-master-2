@@ -14,6 +14,7 @@ function loggStuff() {
 
 //Try out the log manager
 $logManager = new \logger\LogManager();
+$logManager->handleInput();
 
 //loggStuff();
 

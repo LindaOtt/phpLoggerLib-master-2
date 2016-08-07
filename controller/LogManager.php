@@ -32,7 +32,16 @@ class LogManager {
         $this->logCollection->log($logMessageString3, $includeTrace3, $logObject3);
 
          $this->logView = new LogView($this->logCollection);
-        echo $this->logView->getDebugData();
+        //echo $this->logView->getDebugData();
+    }
+
+    public function handleInput() {
+        if($this->logView->viewAllIps()) {
+            echo "The user wants to view all the ips";
+        }
+        else {
+            echo "The user wants to add a message";
+        }
     }
 
 }
