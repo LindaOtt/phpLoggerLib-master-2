@@ -7,6 +7,7 @@ namespace logger;
 class LogView {
 
 	private $log;
+    private static $navURL = "viewallips";
 
 	public function __construct(LogCollection $log) {
 		$this->log = $log;
@@ -122,4 +123,8 @@ class LogView {
 		$ret .= "</ul>";
 		return $ret;
 	}
+
+	public function viewAllIps() {
+        return isset($_GET[self::$navURL]) == true;
+    }
 }
