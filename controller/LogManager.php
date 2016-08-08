@@ -40,8 +40,11 @@ class LogManager {
         if($this->logView->viewAllIps()) {
             echo $this->showAllIps();
         }
+        else if($this->logView->logMessage()) {
+            echo $this->showMsgForm();
+        }
         else {
-            echo $this->showMessageForm();
+            echo $this->showNavList();
         }
     }
 
@@ -50,9 +53,13 @@ class LogManager {
         return $this->logView->getIpView();
     }
 
-    public function showMessageForm() {
+    public function showMsgForm() {
         //Get the form that allows the user to add messages
-        return $this->logView->getMessageHTML();
+        return $this->logView->getMsgFormHTML();
+    }
+
+    public function showNavList() {
+        return $this->logView->getNavList();
     }
 
 }

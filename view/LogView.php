@@ -7,7 +7,8 @@ namespace logger;
 class LogView {
 
 	private $log;
-    private static $navURL = "viewallips";
+    private static $viewIpsURL = "viewallips";
+    private static $addMsgURL = "addmsg";
 
 	public function __construct(LogCollection $log) {
 		$this->log = $log;
@@ -129,11 +130,33 @@ class LogView {
      * @return bool
      */
     public function viewAllIps() {
-        return isset($_GET[self::$navURL]) == true;
+        return isset($_GET[self::$viewIpsURL]) == true;
+    }
+
+    public function logMessage() {
+        return isset($_GET[self::$addMsgURL]) == true;
     }
 
     public function getIpView() {
        $ret = "<h2>All ips</h2>";
+        return $ret;
+    }
+
+    public function getMsgFormHTML() {
+        $ret = "<h2>Add a log message</h2>
+        <form>
+        <label for='message'>Message: </label><input type='text' id='message'>
+        <input type='submit' value='Submit'>
+        </form>";
+        return $ret;
+    }
+
+    public function getNavList() {
+        $ret = "<h2>Pick something:</h2>
+        <ul>
+        <li><a href='?". self::$viewIpsURL ."'>Show all ip addresses</li>
+        <li><a href='?". self::$addMsgURL . "'>Add a message</li>
+</ul>";
         return $ret;
     }
 }
