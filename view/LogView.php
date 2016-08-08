@@ -124,7 +124,16 @@ class LogView {
 		return $ret;
 	}
 
-	public function viewAllIps() {
+
+    /**
+     * @return bool
+     */
+    public function viewAllIps() {
         return isset($_GET[self::$navURL]) == true;
+    }
+
+    public function getIpView() {
+       $ret = "<h2>All ips</h2>";
+        return $ret;
     }
 }

@@ -11,6 +11,7 @@ class LogManager {
     private $logCollection;
     private $logView;
 
+
     public function __construct() {
         $this->logCollection = new LogCollection();
 
@@ -31,17 +32,27 @@ class LogManager {
         $this->logCollection->log($logMessageString2, $includeTrace2, $logObject2);
         $this->logCollection->log($logMessageString3, $includeTrace3, $logObject3);
 
-         $this->logView = new LogView($this->logCollection);
-        //echo $this->logView->getDebugData();
+        $this->logView = new LogView($this->logCollection);
+
     }
 
     public function handleInput() {
         if($this->logView->viewAllIps()) {
-            echo "The user wants to view all the ips";
+            echo $this->showAllIps();
         }
         else {
-            echo "The user wants to add a message";
+            echo $this->showMessageForm();
         }
+    }
+
+    public function showAllIps() {
+        //Get the log collection
+        return $this->logView->getIpView();
+    }
+
+    public function showMessageForm() {
+        //Get the form that allows the user to add messages
+        return $this->logView->getMessageHTML();
     }
 
 }
