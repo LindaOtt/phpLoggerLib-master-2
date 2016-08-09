@@ -20,6 +20,7 @@ class LogManager {
         $this->navView = new NavView();
 
         $this->ipAddress = $this->navView->getIp();
+        assert(is_string($this->ipAddress));
 
         $logMessageString1 = "Message with exception object and trace";
         $includeTrace1 = true;
@@ -33,6 +34,7 @@ class LogManager {
         $includeTrace3 = false;
         $logObject3 = new \Exception("Exception 3");
 
+        //public function logWithIP($string, $trace = false, $object = null, $ip) {
         //Temporary log collection, code before data!
         $this->logCollection->logWithIP($logMessageString1, $includeTrace1, $logObject1, $this->ipAddress);
         $this->logCollection->logWithIP($logMessageString2, $includeTrace2, $logObject2, $this->ipAddress);

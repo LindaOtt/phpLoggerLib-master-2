@@ -143,7 +143,22 @@ class LogView {
     }
 
     public function getIpView() {
-       $ret = "<h2>All ips</h2>";
+       $ret = "<h2>All ips</h2>
+        <table>
+        <tr>
+        <th>Ip address</th>
+        </tr>";
+
+        foreach ($this->log->getList() as $item) {
+            $ret .=
+                "<tr>
+            <td>Ip dummy</td>
+            </tr>";
+        }
+
+
+        $ret .= "</table>
+        ";
         return $ret;
     }
 

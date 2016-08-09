@@ -3,6 +3,7 @@
 namespace logger;
 
 require_once("LogItem.php");
+require_once("LogItemWithIP.php");
 
 class LogCollection {
 	private $logArray = array();
@@ -20,7 +21,7 @@ class LogCollection {
 		$this->logArray[] = new LogItem($string, $trace, $object);
 	}
 
-    public function logWithIP($string, $trace = false, $object = null, $class = "normal", $ip) {
+    public function logWithIP($string, $trace = false, $object = null, $ip) {
         $this->logArray[] = new LogItemWithIP($string, $trace, $object, $ip);
     }
 	
