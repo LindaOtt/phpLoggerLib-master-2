@@ -152,7 +152,7 @@ class LogView {
         foreach ($this->log->getList() as $item) {
             $ret .=
                 "<tr>
-            <td>Ip dummy</td>
+            <td>". $item->m_ip ."</td>
             </tr>";
         }
 

@@ -52,7 +52,7 @@ class LogItemWithIP {
 
 		$this->m_message = $logMessageString;
 
-        $this->ip = $ip;
+        $this->m_ip = $ip;
 
 		if ($logThisObject != null)
 			$this->m_object = var_export($logThisObject, true);
