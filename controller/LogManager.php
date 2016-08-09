@@ -11,12 +11,11 @@ class LogManager {
 
     private $logCollection;
     private $logView;
-    private $db;
+    private $logDAL;
 
     public function __construct() {
-        $this->db = new \logger\LogDAL();
-        $this->logCollection = $this->db->getLogCollection();
-
+        $this->logDAL = new \logger\LogDAL();
+        $this->logCollection = $this->logDAL->getLogCollection();
         $this->logView = new LogView($this->logCollection);
 
     }
