@@ -10,19 +10,26 @@ class LogDAL {
 
     private $logCollection;
     private $navView;
-    private $ipAddress;
+    //private $ipAddress;
+    private static $table = "Logs";
 
-    public function __construct() {
-        $mysqli = new \mysqli("localhost", "root", "root", "logs");
-        if (mysqli_connect_errno()) {
-            printf("Connect failed: %s\n", mysqli_connect_error());
-            exit();
-        }
-        $mysqli->close();
+    public function __construct(\mysqli $db) {
 
+        $this->database = $db;
         $this->logCollection = new \logger\LogCollection();
+
+        $stmt = $this->database->prepare("SELECT * FROM " . self::$table);
+        if($stmt === FALSE) {
+            throw new \Exception($this->database->error);
+        }
+        $stmt->execute();
+        $stmt->bind_result($pk, $ip, $logMessageString);
+        while ($stmt->fetch()) {
+            $this->addLogItem($logMessageString, $includeTrace=false, $logThisObject = null, $ip);
+        }
         $this->navView = new NavView();
 
+            /*
         $this->ipAddress = $this->navView->getIp();
         assert(is_string($this->ipAddress));
 
@@ -42,7 +49,7 @@ class LogDAL {
         $this->addLogItem($logMessageString1, $includeTrace1, $logObject1, $this->ipAddress);
         $this->addLogItem($logMessageString2, $includeTrace2, $logObject2, $this->ipAddress);
         $this->addLogItem($logMessageString3, $includeTrace3, $logObject3, $this->ipAddress);
-
+        */
     }
 
 

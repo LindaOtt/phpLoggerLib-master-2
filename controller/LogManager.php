@@ -12,9 +12,16 @@ class LogManager {
     private $logCollection;
     private $logView;
     private $logDAL;
+    private $mysqli;
 
     public function __construct() {
-        $this->logDAL = new \logger\LogDAL();
+        $this->mysqli = new \mysqli("localhost", "root", "root", "logs");
+        if (mysqli_connect_errno()) {
+            printf("Connect failed: %s\n", mysqli_connect_error());
+            exit();
+        }
+
+        $this->logDAL = new \logger\LogDAL($this->mysqli);
         $this->logCollection = $this->logDAL->getLogCollection();
         $this->logView = new LogView($this->logCollection);
 
@@ -30,6 +37,7 @@ class LogManager {
         else {
             echo $this->showNavList();
         }
+        $this->mysqli->close();
     }
 
     public function showAllIps() {
