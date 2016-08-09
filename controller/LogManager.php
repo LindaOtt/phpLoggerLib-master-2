@@ -5,15 +5,21 @@ require_once("./model/LogCollection.php");
 require_once("./model/LogItem.php");
 
 require_once("./view/LogView.php");
+require_once("./view/NavView.php");
 
 class LogManager {
 
     private $logCollection;
     private $logView;
+    private $navView;
+    private $ipAddress;
 
 
     public function __construct() {
         $this->logCollection = new LogCollection();
+        $this->navView = new NavView();
+
+        $this->ipAddress = $this->navView->getIp();
 
         $logMessageString1 = "Message with exception object and trace";
         $includeTrace1 = true;
@@ -28,9 +34,9 @@ class LogManager {
         $logObject3 = new \Exception("Exception 3");
 
         //Temporary log collection, code before data!
-        $this->logCollection->log($logMessageString1, $includeTrace1, $logObject1);
-        $this->logCollection->log($logMessageString2, $includeTrace2, $logObject2);
-        $this->logCollection->log($logMessageString3, $includeTrace3, $logObject3);
+        $this->logCollection->logWithIP($logMessageString1, $includeTrace1, $logObject1, $this->ipAddress);
+        $this->logCollection->logWithIP($logMessageString2, $includeTrace2, $logObject2, $this->ipAddress);
+        $this->logCollection->logWithIP($logMessageString3, $includeTrace3, $logObject3, $this->ipAddress);
 
         $this->logView = new LogView($this->logCollection);
 
@@ -49,6 +55,7 @@ class LogManager {
     }
 
     public function showAllIps() {
+        //
         //Get the log collection
         return $this->logView->getIpView();
     }

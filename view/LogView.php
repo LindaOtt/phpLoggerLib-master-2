@@ -50,6 +50,11 @@ class LogView {
 		return $dumps;
 	}
 
+	private function getIpAddress() {
+	    $ip = $_SERVER['SERVER_ADDR'];
+        return $ip;
+    }
+
 	/**
 	* @return string HTML 
 	*/
@@ -142,6 +147,10 @@ class LogView {
         return $ret;
     }
 
+
+    /**
+     * @return string
+     */
     public function getMsgFormHTML() {
         $ret = "<h2>Add a log message</h2>
         <form>
@@ -151,6 +160,9 @@ class LogView {
         return $ret;
     }
 
+    /**
+     * @return string
+     */
     public function getNavList() {
         $ret = "<h2>Pick something:</h2>
         <ul>
