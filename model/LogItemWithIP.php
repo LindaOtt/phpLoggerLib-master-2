@@ -38,6 +38,12 @@ class LogItemWithIP {
 	* see http://se1.php.net/manual/en/function.microtime.php
 	*/
 	public $m_microTime;
+
+
+    /**
+     * @var Id of current session
+     */
+    public $m_sessionid;
 	
 	
 	/**
@@ -48,11 +54,13 @@ class LogItemWithIP {
 	* @param boolean $includeTrace save callstack
 	* @return void
 	*/
-	public function __construct($logMessageString, $includeTrace = false, $logThisObject = null, $ip) {
+	public function __construct($logMessageString, $includeTrace = false, $logThisObject = null, $ip, $sessionid) {
 
 		$this->m_message = $logMessageString;
 
         $this->m_ip = $ip;
+
+        $this->m_sessionid = $sessionid;
 
 		if ($logThisObject != null)
 			$this->m_object = var_export($logThisObject, true);

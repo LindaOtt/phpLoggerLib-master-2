@@ -16,20 +16,9 @@ class LogDAL {
     public function __construct(\mysqli $db) {
 
         $this->database = $db;
-        $this->logCollection = new \logger\LogCollection();
+        $this->logCollection = new LogCollection();
 
-        $stmt = $this->database->prepare("SELECT * FROM " . self::$table);
-        if($stmt === FALSE) {
-            throw new \Exception($this->database->error);
-        }
-        $stmt->execute();
-        $stmt->bind_result($pk, $ip, $logMessageString);
-        while ($stmt->fetch()) {
-            $this->addLogItem($logMessageString, $includeTrace=false, $logThisObject = null, $ip);
-        }
-        $this->navView = new NavView();
-
-            /*
+        /*
         $this->ipAddress = $this->navView->getIp();
         assert(is_string($this->ipAddress));
 
@@ -54,11 +43,24 @@ class LogDAL {
 
 
     public function getLogCollection() {
+
+
+        $stmt = $this->database->prepare("SELECT * FROM " . self::$table);
+        if($stmt === FALSE) {
+            throw new \Exception($this->database->error);
+        }
+        $stmt->execute();
+        $stmt->bind_result($pk, $ip, $logMessageString, $sessionid);
+        while ($stmt->fetch()) {
+            $this->addLogItem($logMessageString, $includeTrace=false, $logThisObject = null, $ip, $sessionid);
+        }
+        $this->navView = new NavView();
+
         return $this->logCollection;
     }
 
-    public function addLogItem($logMessageString, $includeTrace, $logObject, $ipAddress) {
-        $this->logCollection->logWithIp($logMessageString, $includeTrace, $logObject, $ipAddress);
+    public function addLogItem($logMessageString, $includeTrace, $logObject, $ipAddress, $sessionid) {
+        $this->logCollection->logWithIp($logMessageString, $includeTrace, $logObject, $ipAddress, $sessionid);
     }
 
 }

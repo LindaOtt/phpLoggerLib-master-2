@@ -153,6 +153,7 @@ class LogView {
             $ret .=
                 "<tr>
             <td>". $item->m_ip ."</td>
+            <td>". $item->m_sessionid ."</td>
             </tr>";
         }
 

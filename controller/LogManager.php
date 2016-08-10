@@ -15,6 +15,8 @@ class LogManager {
     private $mysqli;
 
     public function __construct() {
+        session_start();
+
         $this->mysqli = new \mysqli("localhost", "root", "root", "logs");
         if (mysqli_connect_errno()) {
             printf("Connect failed: %s\n", mysqli_connect_error());
@@ -28,6 +30,7 @@ class LogManager {
     }
 
     public function handleInput() {
+
         if($this->logView->viewAllIps()) {
             echo $this->showAllIps();
         }
