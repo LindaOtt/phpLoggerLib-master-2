@@ -23,6 +23,12 @@ class LogItemWithIP {
 
 
     /**
+     * @var number of distinct sessions for this ip
+     */
+    public $m_numberofsessions;
+
+
+    /**
 	* @var array From debug_backtrace or null
 	*/
 	public $m_debug_backtrace;

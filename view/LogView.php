@@ -145,7 +145,7 @@ class LogView {
     public function getIpView() {
 
        $ret = "<h2>All ips</h2>
-        <table>
+        <table border='1'>
         <tr>
         <th>Ip address</th>
         <th>Session ID</th>

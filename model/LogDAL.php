@@ -44,8 +44,10 @@ class LogDAL {
 
     public function getLogCollection() {
 
+        $preparestmt = "SELECT * FROM " . self::$table;
+        $preparestmt .= " ORDER BY microtime DESC";
 
-        $stmt = $this->database->prepare("SELECT * FROM " . self::$table);
+        $stmt = $this->database->prepare($preparestmt);
         if($stmt === FALSE) {
             throw new \Exception($this->database->error);
         }
@@ -58,6 +60,7 @@ class LogDAL {
 
         return $this->logCollection;
     }
+
 
     public function addLogItem($logMessageString, $includeTrace, $logObject, $ipAddress, $sessionid, $microtime) {
         $this->logCollection->logWithIp($logMessageString, $includeTrace, $logObject, $ipAddress, $sessionid, $microtime);

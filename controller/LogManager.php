@@ -14,6 +14,7 @@ class LogManager {
     private $logView;
     private $logDAL;
     private $mysqli;
+    private $view;
 
     public function __construct() {
 
@@ -46,6 +47,10 @@ class LogManager {
             echo $this->showNavList();
         }
         $this->mysqli->close();
+    }
+
+    public function generateOutput() {
+        return $this->view;
     }
 
     public function showAllIps() {
