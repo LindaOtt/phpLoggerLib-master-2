@@ -54,7 +54,9 @@ class LogItemWithIP {
 	* @param boolean $includeTrace save callstack
 	* @return void
 	*/
-	public function __construct($logMessageString, $includeTrace = false, $logThisObject = null, $ip, $sessionid) {
+	public function __construct($logMessageString, $includeTrace = false, $logThisObject = null, $ip, $sessionid, $microtime) {
+
+	    $this->m_microTime = $microtime;
 
 		$this->m_message = $logMessageString;
 
@@ -66,8 +68,6 @@ class LogItemWithIP {
 			$this->m_object = var_export($logThisObject, true);
 		
 		$this->m_debug_backtrace = debug_backtrace();
-
-		$this->m_microTime = microtime();
 
 		$this->m_calledFrom = $this->cleanFilePath($this->m_debug_backtrace[2]["file"]) . " " . $this->m_debug_backtrace[2]["line"];
 

@@ -21,8 +21,8 @@ class LogCollection {
 		$this->logArray[] = new LogItem($string, $trace, $object);
 	}
 
-    public function logWithIP($string, $trace = false, $object = null, $ip, $sessionid) {
-        $this->logArray[] = new LogItemWithIP($string, $trace, $object, $ip, $sessionid);
+    public function logWithIP($string, $trace = false, $object = null, $ip, $sessionid, $microtime) {
+        $this->logArray[] = new LogItemWithIP($string, $trace, $object, $ip, $sessionid, $microtime);
     }
 	
 	/**

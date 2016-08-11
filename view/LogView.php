@@ -143,17 +143,29 @@ class LogView {
     }
 
     public function getIpView() {
+
        $ret = "<h2>All ips</h2>
         <table>
         <tr>
         <th>Ip address</th>
+        <th>Session ID</th>
+        <th>Time</th>
         </tr>";
 
         foreach ($this->log->getList() as $item) {
+            //Formatting microtime into a more readable format
+            $microTime = $item->m_microTime;
+            list($usec, $sec) = explode(' ', $microTime);
+            $usec = str_replace("0.", ".", $usec);
+
+            date_default_timezone_set('Europe/Stockholm');
+            $readableTime = date('Ymd G:i:s', $sec);
+
             $ret .=
                 "<tr>
             <td>". $item->m_ip ."</td>
             <td>". $item->m_sessionid ."</td>
+            <td>". $readableTime ."</td>
             </tr>";
         }
 

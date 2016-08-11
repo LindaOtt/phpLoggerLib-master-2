@@ -5,6 +5,7 @@ require_once("./model/LogCollection.php");
 require_once("./model/LogItem.php");
 require_once("./model/LogDAL.php");
 require_once("./view/LogView.php");
+require_once("./view/NavView.php");
 
 
 class LogManager {
@@ -15,7 +16,8 @@ class LogManager {
     private $mysqli;
 
     public function __construct() {
-        session_start();
+
+
 
         $this->mysqli = new \mysqli("localhost", "root", "root", "logs");
         if (mysqli_connect_errno()) {
@@ -26,10 +28,13 @@ class LogManager {
         $this->logDAL = new \logger\LogDAL($this->mysqli);
         $this->logCollection = $this->logDAL->getLogCollection();
         $this->logView = new LogView($this->logCollection);
-
+        $this->navView = new navView();
     }
 
     public function handleInput() {
+
+        //Starting session
+        $this->navView->handleSession();
 
         if($this->logView->viewAllIps()) {
             echo $this->showAllIps();

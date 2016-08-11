@@ -50,17 +50,17 @@ class LogDAL {
             throw new \Exception($this->database->error);
         }
         $stmt->execute();
-        $stmt->bind_result($pk, $ip, $logMessageString, $sessionid);
+        $stmt->bind_result($pk, $ip, $logMessageString, $sessionid, $microtime);
         while ($stmt->fetch()) {
-            $this->addLogItem($logMessageString, $includeTrace=false, $logThisObject = null, $ip, $sessionid);
+            $this->addLogItem($logMessageString, $includeTrace=false, $logThisObject = null, $ip, $sessionid, $microtime);
         }
         $this->navView = new NavView();
 
         return $this->logCollection;
     }
 
-    public function addLogItem($logMessageString, $includeTrace, $logObject, $ipAddress, $sessionid) {
-        $this->logCollection->logWithIp($logMessageString, $includeTrace, $logObject, $ipAddress, $sessionid);
+    public function addLogItem($logMessageString, $includeTrace, $logObject, $ipAddress, $sessionid, $microtime) {
+        $this->logCollection->logWithIp($logMessageString, $includeTrace, $logObject, $ipAddress, $sessionid, $microtime);
     }
 
 }

@@ -54,7 +54,6 @@ class LogItem {
 
 		$this->m_calledFrom = $this->cleanFilePath($this->m_debug_backtrace[2]["file"]) . " " . $this->m_debug_backtrace[2]["line"];
 
-
 		if (!$includeTrace) {
 			$this->m_debug_backtrace = null;
 		}
