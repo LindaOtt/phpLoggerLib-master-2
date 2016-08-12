@@ -166,7 +166,9 @@ class LogView {
 
         $ret .= "</table>
         ";
+        print_r($this->log->getSortedIpList());
         return $ret;
+
     }
 
 

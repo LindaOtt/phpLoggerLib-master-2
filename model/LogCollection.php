@@ -7,7 +7,8 @@ require_once("LogItemWithIP.php");
 
 class LogCollection {
 	private $logArray = array();
-	
+	private $sortedIpArray = array();
+    private $sortedIpArrayCounter = array();
 
 	/**
 	* Logging Method
@@ -31,4 +32,51 @@ class LogCollection {
 	public function getList() {
 		return $this->logArray;
 	}
+
+	public function getSortedIpList() {
+	    if (empty($this->logArray)) {
+	        throw new Exception('There are no recorded log items.');
+        }
+        else {
+            $counter = 0;
+            foreach ($this->logArray as $item) {
+                $ip = $item->m_ip;
+                $sessionid = $item->m_sessionid;
+                $datetime = $item->m_dateTime;
+
+                $this->sortedIpArray[] = array(
+                    /*
+                    $number => $number,
+                    $ip => $ip,
+                    $sessionid => $sessionid,
+                    $datetime => $datetime)
+                    */
+                    $ip,
+                    $sessionid,
+                    $datetime)
+                ;
+                $counter++;
+            }
+        }
+        //return $this->sortedIpArray;
+        $counter = 0;
+        foreach ($this->sortedIpArray as $item) {
+            $ip = $item[0];
+            echo "$ip<br>";
+            if (array_key_exists($ip, $this->sortedIpArrayCounter)) {
+                $countervalue = $this->sortedIpArrayCounter[$ip]+1;
+                echo "countervalue: $countervalue<br>";
+                $this->sortedIpArrayCounter[$ip] = $countervalue;
+                echo $counter . ". Key exists<br>";
+            }
+            else {
+                $this->sortedIpArrayCounter[$ip] = 1;
+                echo $counter. ". Key doesn't exist<br>";
+            }
+
+
+            $counter++;
+        }
+        return $this->sortedIpArrayCounter;
+    }
 }
