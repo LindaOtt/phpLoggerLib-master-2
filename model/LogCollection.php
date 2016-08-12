@@ -45,12 +45,6 @@ class LogCollection {
                 $datetime = $item->m_dateTime;
 
                 $this->sortedIpArray[] = array(
-                    /*
-                    $number => $number,
-                    $ip => $ip,
-                    $sessionid => $sessionid,
-                    $datetime => $datetime)
-                    */
                     $ip,
                     $sessionid,
                     $datetime)
@@ -62,18 +56,13 @@ class LogCollection {
         $counter = 0;
         foreach ($this->sortedIpArray as $item) {
             $ip = $item[0];
-            echo "$ip<br>";
             if (array_key_exists($ip, $this->sortedIpArrayCounter)) {
                 $countervalue = $this->sortedIpArrayCounter[$ip]+1;
-                echo "countervalue: $countervalue<br>";
                 $this->sortedIpArrayCounter[$ip] = $countervalue;
-                echo $counter . ". Key exists<br>";
             }
             else {
                 $this->sortedIpArrayCounter[$ip] = 1;
-                echo $counter. ". Key doesn't exist<br>";
             }
-
 
             $counter++;
         }

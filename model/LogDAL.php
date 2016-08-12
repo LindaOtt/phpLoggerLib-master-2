@@ -23,7 +23,7 @@ class LogDAL {
     public function getLogCollection() {
 
         $preparestmt = "SELECT * FROM " . self::$table;
-        $preparestmt .= " ORDER BY datetime ASC";
+        $preparestmt .= " ORDER BY datetime DESC";
 
         $stmt = $this->database->prepare($preparestmt);
         if($stmt === FALSE) {

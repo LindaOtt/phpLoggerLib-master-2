@@ -144,10 +144,14 @@ class LogView {
 
     public function getIpView() {
 
+
+
+        /*
        $ret = "<h2>All ips</h2>
         <table border='1'>
         <tr>
         <th>Ip address</th>
+        <th>Number of sessions</th>
         <th>Session ID</th>
         <th>Time</th>
         </tr>";
@@ -158,15 +162,35 @@ class LogView {
             $ret .=
                 "<tr>
             <td>". $item->m_ip ."</td>
+            <td>". $sessionsPerIpList[$item->m_ip] ."</td>
             <td>". $item->m_sessionid ."</td>
             <td>". $item->m_dateTime ."</td>
             </tr>";
         }
 
 
-        $ret .= "</table>
-        ";
-        print_r($this->log->getSortedIpList());
+
+        $ret .= "</table>";
+        */
+        $sessionsPerIpList = $this->log->getSortedIpList();
+        $ret = "<h2>All ips</h2>
+        <table border='1'>
+        <tr>
+        <th>Ip address</th>
+        <th>Number of sessions</th>
+        </tr>";
+        foreach ($sessionsPerIpList as $key=> $value) {
+
+            $ret .=
+                "<tr>
+            <td><a href='?viewip=".$key."'>".  $key ."</a></td>
+            <td>". $value ."</td>
+            </tr>";
+        }
+
+
+
+        $ret .= "</table>";
         return $ret;
 
     }
