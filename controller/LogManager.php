@@ -39,6 +39,9 @@ class LogManager {
         if($this->logView->viewAllIps()) {
             echo $this->showAllIps();
         }
+        if($this->logView->viewOneIp()) {
+            echo $this->showOneIp();
+        }
         else if($this->logView->logMessage()) {
             echo $this->showMsgForm();
         }
@@ -55,6 +58,10 @@ class LogManager {
     public function showAllIps() {
         //Get the log collection
         return $this->logView->getIpView();
+    }
+
+    public function showOneIp() {
+        return $this->logView->getOneIpView();
     }
 
     public function showMsgForm() {

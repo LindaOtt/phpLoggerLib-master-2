@@ -8,6 +8,7 @@ class LogView {
 
 	private $log;
     private static $viewIpsURL = "viewallips";
+    private static $viewOneIpURL = "viewip";
     private static $addMsgURL = "addmsg";
 
 	public function __construct(LogCollection $log) {
@@ -138,6 +139,10 @@ class LogView {
         return isset($_GET[self::$viewIpsURL]) == true;
     }
 
+    public function viewOneIp() {
+        return isset($_GET[self::$viewOneIpURL]) == true;
+    }
+
     public function logMessage() {
         return isset($_GET[self::$addMsgURL]) == true;
     }
@@ -193,6 +198,35 @@ class LogView {
         $ret .= "</table>";
         return $ret;
 
+    }
+
+
+    public function getOneIpView() {
+        $viewedIP=$_GET[self::$viewOneIpURL];
+
+        $ret = "<h2>IP: $viewedIP</h2>
+        <table border='1'>
+        <tr>
+        <th>Ip address</th>
+        <th>Session ID</th>
+        <th>Time</th>
+        </tr>";
+
+        foreach ($this->log->getList() as $item) {
+            date_default_timezone_set('Europe/Stockholm');
+            if ($viewedIP==$item->m_ip) {
+            $ret .=
+                "<tr>
+            <td>". $item->m_ip ."</td>
+            <td>". $item->m_sessionid ."</td>
+            <td>". $item->m_dateTime ."</td>
+            </tr>";
+            }
+        }
+
+        $ret .= "</table>";
+
+        return $ret;
     }
 
 

@@ -68,4 +68,6 @@ class LogCollection {
         }
         return $this->sortedIpArrayCounter;
     }
+
+
 }
