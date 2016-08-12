@@ -12,6 +12,8 @@ function loggStuff() {
 	loggThis("include an object", new \Exception("foo exception"), false);
 }
 
+
+
 //Try out the log manager
 $logManager = new \logger\LogManager();
 $logManager->handleInput();

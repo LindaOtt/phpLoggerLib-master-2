@@ -47,6 +47,12 @@ class LogItemWithIP {
 
 
     /**
+     * @var date and time, stored in datetime format in database
+     */
+    public $m_dateTime;
+
+
+    /**
      * @var Id of current session
      */
     public $m_sessionid;
@@ -60,9 +66,9 @@ class LogItemWithIP {
 	* @param boolean $includeTrace save callstack
 	* @return void
 	*/
-	public function __construct($logMessageString, $includeTrace = false, $logThisObject = null, $ip, $sessionid, $microtime) {
+	public function __construct($logMessageString, $includeTrace = false, $logThisObject = null, $ip, $sessionid, $datetime) {
 
-	    $this->m_microTime = $microtime;
+	    $this->m_dateTime = $datetime;
 
 		$this->m_message = $logMessageString;
 
