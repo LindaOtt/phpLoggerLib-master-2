@@ -9,6 +9,7 @@ class LogView {
 	private $log;
     private static $viewIpsURL = "viewallips";
     private static $viewOneIpURL = "viewip";
+    private static $viewOneSessionURL = "sessionid";
     private static $addMsgURL = "addmsg";
 
 	public function __construct(LogCollection $log) {
@@ -143,6 +144,10 @@ class LogView {
         return isset($_GET[self::$viewOneIpURL]) == true;
     }
 
+    public function viewOneSession() {
+        return isset($_GET[self::$viewOneSessionURL]) == true;
+    }
+
     public function logMessage() {
         return isset($_GET[self::$addMsgURL]) == true;
     }
@@ -218,7 +223,7 @@ class LogView {
             $ret .=
                 "<tr>
             <td>". $item->m_ip ."</td>
-            <td>". $item->m_sessionid ."</td>
+            <td><a href='?sessionid=".$item->m_sessionid."'>". $item->m_sessionid ."</a></td>
             <td>". $item->m_dateTime ."</td>
             </tr>";
             }
@@ -226,6 +231,29 @@ class LogView {
 
         $ret .= "</table>";
 
+        return $ret;
+    }
+
+    public function getOneSessionView() {
+        $viewedSession=$_GET[self::$viewOneSessionURL];
+        $ret = "<h2>Session: $viewedSession</h2>
+        <table border='1'>
+        <tr>
+        <th>Session ID</th>
+        <th>Time</th>
+        </tr>";
+        foreach ($this->log->getList() as $item) {
+            date_default_timezone_set('Europe/Stockholm');
+            if ($viewedSession==$item->m_sessionid) {
+                $ret .=
+                    "<tr>
+                    <td>". $item->m_sessionid ."</td>
+                    <td>". $item->m_dateTime ."</td>
+                    </tr>";
+            }
+        }
+        $ret .= "</table>";
+        $ret .= "<a href='?'>Back</a>";
         return $ret;
     }
 

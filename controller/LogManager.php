@@ -36,11 +36,15 @@ class LogManager {
         //Starting session
         $this->navView->handleSession();
 
+        /*
         if($this->logView->viewAllIps()) {
             echo $this->showAllIps();
         }
-        if($this->logView->viewOneIp()) {
+        else if($this->logView->viewOneIp()) {
             echo $this->showOneIp();
+        }
+        else if($this->logView->viewOneSession()) {
+            echo $this->showOneSession();
         }
         else if($this->logView->logMessage()) {
             echo $this->showMsgForm();
@@ -48,6 +52,25 @@ class LogManager {
         else {
             echo $this->showNavList();
         }
+        */
+
+        switch(true) {
+            case $this->logView->viewAllIps():
+                echo $this->showAllIps();
+                break;
+            case $this->logView->viewOneIp():
+                echo $this->showOneIp();
+                break;
+            case $this->logView->viewOneSession():
+                echo $this->showOneSession();
+                break;
+            case $this->logView->logMessage():
+                echo $this->showMsgForm();
+                break;
+            default:
+                echo $this->showNavList();
+        }
+
         $this->mysqli->close();
     }
 
@@ -62,6 +85,10 @@ class LogManager {
 
     public function showOneIp() {
         return $this->logView->getOneIpView();
+    }
+
+    public function showOneSession() {
+        return $this->logView->getOneSessionView();
     }
 
     public function showMsgForm() {
