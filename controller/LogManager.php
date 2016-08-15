@@ -94,7 +94,7 @@ class LogManager {
         $ip = $this->logView->getIpAddress();
         $sessionid = $this->logView->getSessionId();
         $datetime = $this->logView->getTime();
-        $this->logItemWithIP = new LogItemWithIP($message, false, null, $ip, $sessionid, $datetime);
+        $this->logItemWithIP = new LogItemWithIP($message, true, null, $ip, $sessionid, $datetime);
         $sentmessage = $this->logDAL->addLogItemToDb($this->logItemWithIP);
         if ($sentmessage != null) {
             $this->logView->showSentMessage($sentmessage);

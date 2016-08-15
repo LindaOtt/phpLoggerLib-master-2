@@ -257,7 +257,7 @@ class LogView {
         <ul>
         <li><a href='?". self::$viewIpsURL ."'>Show all ip addresses</li>
         <li><a href='?". self::$addMsgURL . "'>Add a message</li>
-</ul>";
+        </ul>";
         return $ret;
     }
 
@@ -274,5 +274,10 @@ class LogView {
 
     public function showSentMessage($message) {
         echo "<p>$message</p>";
+        echo $this->getLinkToMainPage();
+    }
+
+    public function getLinkToMainPage() {
+        return "<p><a href=''>Back</a></p>";
     }
 }

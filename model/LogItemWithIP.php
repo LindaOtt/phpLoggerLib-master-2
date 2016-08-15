@@ -3,6 +3,11 @@
 //This has no namespace for convenience, it should really be a common module
 namespace logger;
 
+class NoMessageException extends \Exception {};
+class NoIpException extends \Exception {};
+class NoSessionIdException extends \Exception{};
+class NoDateTimeException extends \Exception{};
+
 class LogItemWithIP {
 	//Maybe add some information hiding
 	/**
@@ -67,6 +72,16 @@ class LogItemWithIP {
 	* @return void
 	*/
 	public function __construct($logMessageString, $includeTrace = false, $logThisObject = null, $ip, $sessionid, $datetime) {
+
+        if (is_string($logMessageString) == false || strlen($logMessageString) == 0)
+            throw new NoMessageException();
+        if (is_string(empty($ip)) || strlen($ip) == 0)
+            throw new NoIpException();
+        if (is_string($sessionid) == false || strlen($sessionid) == 0)
+            throw new NoSessionIdException();
+        if (is_string($datetime) == false || strlen($datetime) == 0)
+            throw new NoDateTimeException();
+        
 
 	    $this->m_dateTime = $datetime;
 
