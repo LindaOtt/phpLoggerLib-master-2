@@ -2,8 +2,6 @@
 
 namespace logger;
 
-
-
 class LogView {
 
 	private $log;
@@ -11,6 +9,8 @@ class LogView {
     private static $viewOneIpURL = "viewip";
     private static $viewOneSessionURL = "sessionid";
     private static $addMsgURL = "addmsg";
+    private static $submitPostID = "submit";
+    private static $MessageID = "message";
 
 	public function __construct(LogCollection $log) {
 		$this->log = $log;
@@ -51,11 +51,6 @@ class LogView {
 		    </div>";
 		return $dumps;
 	}
-
-	private function getIpAddress() {
-	    $ip = $_SERVER['SERVER_ADDR'];
-        return $ip;
-    }
 
 	/**
 	* @return string HTML 
@@ -152,36 +147,12 @@ class LogView {
         return isset($_GET[self::$addMsgURL]) == true;
     }
 
+    public function submitMessage() {
+        return isset($_POST[self::$submitPostID]) == true;
+    }
+
     public function getIpView() {
 
-
-
-        /*
-       $ret = "<h2>All ips</h2>
-        <table border='1'>
-        <tr>
-        <th>Ip address</th>
-        <th>Number of sessions</th>
-        <th>Session ID</th>
-        <th>Time</th>
-        </tr>";
-
-        foreach ($this->log->getList() as $item) {
-            date_default_timezone_set('Europe/Stockholm');
-
-            $ret .=
-                "<tr>
-            <td>". $item->m_ip ."</td>
-            <td>". $sessionsPerIpList[$item->m_ip] ."</td>
-            <td>". $item->m_sessionid ."</td>
-            <td>". $item->m_dateTime ."</td>
-            </tr>";
-        }
-
-
-
-        $ret .= "</table>";
-        */
         $sessionsPerIpList = $this->log->getSortedIpList();
         $ret = "<h2>All ips</h2>
         <table border='1'>
@@ -197,8 +168,6 @@ class LogView {
             <td>". $value ."</td>
             </tr>";
         }
-
-
 
         $ret .= "</table>";
         return $ret;
@@ -263,11 +232,21 @@ class LogView {
      */
     public function getMsgFormHTML() {
         $ret = "<h2>Add a log message</h2>
-        <form>
-        <label for='message'>Message: </label><input type='text' id='message'>
-        <input type='submit' value='Submit'>
+        <form method='post' action='?'>
+        <label for='message'>Message: </label><input type='text' id='message' name='message'>
+        <input type='submit' value='Submit' name='submit'>
         </form>";
         return $ret;
+    }
+
+    public function getIpAddress() {
+        $ip = $_SERVER['SERVER_ADDR'];
+        return $ip;
+    }
+
+    public function getSessionId() {
+        $sessionid = session_id();
+        return $sessionid;
     }
 
     /**
@@ -280,5 +259,20 @@ class LogView {
         <li><a href='?". self::$addMsgURL . "'>Add a message</li>
 </ul>";
         return $ret;
+    }
+
+    public function getMessage() {
+        return $_POST[self::$MessageID];
+    }
+
+    public function getTime() {
+        list($usec, $sec) = explode(" ", microtime());
+        date_default_timezone_set('Europe/Stockholm');
+        $date = date("Y-m-d H:i:s", $sec);
+        return $date;
+    }
+
+    public function showSentMessage($message) {
+        echo "<p>$message</p>";
     }
 }

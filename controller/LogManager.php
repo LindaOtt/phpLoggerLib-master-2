@@ -2,7 +2,7 @@
 namespace logger;
 
 require_once("./model/LogCollection.php");
-require_once("./model/LogItem.php");
+require_once("./model/LogItemWithIP.php");
 require_once("./model/LogDAL.php");
 require_once("./view/LogView.php");
 require_once("./view/NavView.php");
@@ -15,6 +15,7 @@ class LogManager {
     private $logDAL;
     private $mysqli;
     private $view;
+    private $logItemWithIP;
 
     public function __construct() {
 
@@ -29,30 +30,13 @@ class LogManager {
         $this->logCollection = $this->logDAL->getLogCollection();
         $this->logView = new LogView($this->logCollection);
         $this->navView = new navView();
+
     }
 
     public function handleInput() {
 
         //Starting session
         $this->navView->handleSession();
-
-        /*
-        if($this->logView->viewAllIps()) {
-            echo $this->showAllIps();
-        }
-        else if($this->logView->viewOneIp()) {
-            echo $this->showOneIp();
-        }
-        else if($this->logView->viewOneSession()) {
-            echo $this->showOneSession();
-        }
-        else if($this->logView->logMessage()) {
-            echo $this->showMsgForm();
-        }
-        else {
-            echo $this->showNavList();
-        }
-        */
 
         switch(true) {
             case $this->logView->viewAllIps():
@@ -66,6 +50,9 @@ class LogManager {
                 break;
             case $this->logView->logMessage():
                 echo $this->showMsgForm();
+                break;
+            case $this->logView->submitMessage():
+                $this->addMessageToDb();
                 break;
             default:
                 echo $this->showNavList();
@@ -98,6 +85,21 @@ class LogManager {
 
     public function showNavList() {
         return $this->logView->getNavList();
+    }
+
+    public function addMessageToDb() {
+
+        //Get the message from view
+        $message = $this->logView->getMessage();
+        $ip = $this->logView->getIpAddress();
+        $sessionid = $this->logView->getSessionId();
+        $datetime = $this->logView->getTime();
+        $this->logItemWithIP = new LogItemWithIP($message, false, null, $ip, $sessionid, $datetime);
+        $sentmessage = $this->logDAL->addLogItemToDb($this->logItemWithIP);
+        if ($sentmessage != null) {
+            $this->logView->showSentMessage($sentmessage);
+        }
+
     }
 
 }
