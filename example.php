@@ -15,7 +15,7 @@ function loggStuff() {
 
 
 //Try out the log manager
-$logManager = new \logger\LogManager();
+$logManager = new \controller\LogManager();
 $logManager->handleInput();
 
 //loggStuff();

@@ -1,5 +1,5 @@
 <?php
-namespace logger;
+namespace view;
 
 class NavView {
 

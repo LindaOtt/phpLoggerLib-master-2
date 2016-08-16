@@ -1,7 +1,7 @@
 <?php
 
 //This has no namespace for convenience, it should really be a common module
-namespace logger;
+namespace model;
 
 class NoMessageException extends \Exception {};
 class NoIpException extends \Exception {};

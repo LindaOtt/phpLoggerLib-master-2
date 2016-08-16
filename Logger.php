@@ -6,7 +6,7 @@ require_once("view/LogView.php");
 
 //uses globals for convenience
 //to let us avoid create and use an object...
-$logCollection = new logger\LogCollection();
+$logCollection = new model\LogCollection();
 
 /**
 * Logging Method

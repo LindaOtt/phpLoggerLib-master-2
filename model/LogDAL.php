@@ -1,6 +1,6 @@
 <?php
 
-namespace logger;
+namespace model;
 
 require_once("./view/NavView.php");
 require_once("./model/LogCollection.php");
@@ -37,7 +37,7 @@ class LogDAL {
         while ($stmt->fetch()) {
             $this->addLogItemToArray($logMessageString, $trace, $logThisObject, $ip, $sessionid, $datetime);
         }
-        $this->navView = new NavView();
+        $this->navView = new \view\NavView();
 
         return $this->logCollection;
     }

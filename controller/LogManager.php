@@ -1,5 +1,5 @@
 <?php
-namespace logger;
+namespace controller;
 
 require_once("./model/LogCollection.php");
 require_once("./model/LogItemWithIP.php");
@@ -26,10 +26,10 @@ class LogManager {
             exit();
         }
 
-        $this->logDAL = new \logger\LogDAL($this->mysqli);
+        $this->logDAL = new \model\LogDAL($this->mysqli);
         $this->logCollection = $this->logDAL->getLogCollection();
-        $this->logView = new LogView($this->logCollection);
-        $this->navView = new navView();
+        $this->logView = new \view\LogView($this->logCollection);
+        $this->navView = new \view\navView();
 
     }
 
@@ -94,7 +94,7 @@ class LogManager {
         $ip = $this->logView->getIpAddress();
         $sessionid = $this->logView->getSessionId();
         $datetime = $this->logView->getTime();
-        $this->logItemWithIP = new LogItemWithIP($message, true, null, $ip, $sessionid, $datetime);
+        $this->logItemWithIP = new \model\LogItemWithIP($message, true, null, $ip, $sessionid, $datetime);
         $sentmessage = $this->logDAL->addLogItemToDb($this->logItemWithIP);
         if ($sentmessage != null) {
             $this->logView->showSentMessage($sentmessage);

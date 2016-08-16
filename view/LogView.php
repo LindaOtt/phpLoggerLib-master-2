@@ -1,6 +1,6 @@
 <?php
 
-namespace logger;
+namespace view;
 
 class LogView {
 
@@ -12,7 +12,7 @@ class LogView {
     private static $submitPostID = "submit";
     private static $MessageID = "message";
 
-	public function __construct(LogCollection $log) {
+	public function __construct(\model\LogCollection $log) {
 		$this->log = $log;
 	}
 
@@ -72,7 +72,7 @@ class LogView {
 	* @param LogItem $item
 	* @return string HTML 
 	*/
-	private function showDebugItem(LogItem $item) {
+	private function showDebugItem(\model\LogItem $item) {
 		
 		if ($item->m_debug_backtrace != null) {
 			$debug = "<h4>Trace:</h4>
@@ -229,23 +229,12 @@ class LogView {
                             continue;
                         }
                         $key = $key - 2;
-                        $debug .= "<li> $key " . LogItem::cleanFilePath($row['file']) . " Line : " . $row["line"] .  "</li>";
+                        $debug .= "<li> $key " . \model\LogItem::cleanFilePath($row['file']) . " Line : " . $row["line"] .  "</li>";
                     }
                     $debug .= "</ul>";
                 } else {
                     $debug = "";
                 }
-
-                //$object = unserialize($item->m_object);
-                /*
-                $fixed_object = preg_replace_callback ( '!s:(d+):"(.*?)";!',
-                    function($match) {
-                        return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-                    },
-                    unserialize($item->m_object) );
-
-
-*/
 
                 $object = print_r($item->m_object, true);
                 $ret .=
@@ -292,7 +281,7 @@ class LogView {
     public function getNavList() {
         $ret = "<h2>Pick something:</h2>
         <ul>
-        <li><a href='?". self::$viewIpsURL ."'>Show all ip addresses</li>
+        <li><a href='?". self::$viewIpsURL ."'>Show all ip addresses with log traces</li>
         <li><a href='?". self::$addMsgURL . "'>Add a message</li>
         </ul>";
         return $ret;
