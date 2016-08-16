@@ -22,7 +22,7 @@ class LogCollection {
 		$this->logArray[] = new LogItem($string, $trace, $object);
 	}
 
-    public function logWithIP($string, $trace = false, $object = null, $ip, $sessionid, $datetime) {
+    public function logWithIP($string, $trace, $object, $ip, $sessionid, $datetime) {
         $this->logArray[] = new LogItemWithIP($string, $trace, $object, $ip, $sessionid, $datetime);
     }
 	

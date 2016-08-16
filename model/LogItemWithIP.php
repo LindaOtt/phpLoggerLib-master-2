@@ -71,7 +71,7 @@ class LogItemWithIP {
 	* @param boolean $includeTrace save callstack
 	* @return void
 	*/
-	public function __construct($logMessageString, $includeTrace = false, $logThisObject = null, $ip, $sessionid, $datetime) {
+	public function __construct($logMessageString, $includeTrace = null, $logThisObject = null, $ip, $sessionid, $datetime) {
 
         if (is_string($logMessageString) == false || strlen($logMessageString) == 0)
             //throw new NoMessageException();
@@ -95,10 +95,12 @@ class LogItemWithIP {
 
         $this->m_sessionid = $sessionid;
 
-		if ($logThisObject != null)
-			$this->m_object = var_export($logThisObject, true);
-		
-		$this->m_debug_backtrace = debug_backtrace();
+        $this->m_debug_backtrace = null;
+
+		if ($logThisObject != null) {
+            $this->m_object = var_export($logThisObject, true);
+            $this->m_debug_backtrace = debug_backtrace();
+        }
 
 		$this->m_calledFrom = $this->cleanFilePath($this->m_debug_backtrace[2]["file"]) . " " . $this->m_debug_backtrace[2]["line"];
 

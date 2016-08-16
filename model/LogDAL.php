@@ -24,7 +24,9 @@ class LogDAL {
     public function getLogCollection() {
 
         $preparestmt = "SELECT * FROM " . self::$table;
-        $preparestmt .= " ORDER BY datetime DESC";
+        $preparestmt .= " WHERE logobject IS NOT NULL";
+        $preparestmt .= " AND trace IS NOT NULL";
+        $preparestmt .= " ORDER BY datetime DESC ";
 
         $stmt = $this->database->prepare($preparestmt);
         if($stmt === FALSE) {
@@ -47,11 +49,10 @@ class LogDAL {
         $datetime = $logitem->m_dateTime;
         $debugbacktrace = $logitem->m_debug_backtrace;
         $logThisObject = $logitem->m_object;
-        if ($logitem->m_debug_backtrace != null) {
-            $debugbacktrace = serialize($debugbacktrace);
-        }
-        if ($logitem->m_object != null) {
+
+        if ($logitem->m_object != null && $logitem->m_debug_backtrace != null) {
             $logThisObject = serialize($logThisObject);
+            $debugbacktrace = serialize($debugbacktrace);
         }
 
         $insertstmt = "INSERT INTO `". self::$table . "` (`pk`, `ip`, `message`, `trace`, `logobject`, `sessionid`, `datetime`)
