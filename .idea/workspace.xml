@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="87dd156a-0ac0-4460-b758-89dc8543ae96" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/LogManager.php" afterPath="$PROJECT_DIR$/controller/LogManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/LogDAL.php" afterPath="$PROJECT_DIR$/model/LogDAL.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/LogItemWithIP.php" afterPath="$PROJECT_DIR$/model/LogItemWithIP.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/LogView.php" afterPath="$PROJECT_DIR$/view/LogView.php" />
     </list>
     <ignored path="phpLoggerLib-master.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,8 +28,8 @@
       <file leaf-file-name="example.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="289">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -46,17 +45,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogDAL.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LogDAL.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/LogDAL.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="56" column="40" selection-start-line="56" selection-start-column="40" selection-end-line="56" selection-end-column="40" />
+            <state relative-caret-position="228">
+              <caret line="57" column="39" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
               <folding>
-                <marker date="1471261366027" expanded="true" signature="504:517" ph="SELECT * FRO... " />
-                <marker date="1471261366027" expanded="true" signature="504:518" ph="SELECT * FRO... ${$stmt = $this-&gt;database-&gt;prepare(&quot;SELECT * FROM &quot; . self::$table)}" />
-                <marker date="1471261366027" expanded="true" signature="1353:1365" ph="INSERT INTO " />
-                <marker date="1471261366027" expanded="true" signature="1353:1382" ph="INSERT INTO " />
-                <marker date="1471261366027" expanded="true" signature="1353:1462" ph="INSERT INTO ${self::$table}... " />
+                <marker date="1471334754716" expanded="true" signature="504:517" ph="SELECT * FRO... " />
+                <marker date="1471334754716" expanded="true" signature="504:518" ph="SELECT * FRO... ${$stmt = $this-&gt;database-&gt;prepare(&quot;SELECT * FROM &quot; . self::$table)}" />
+                <marker date="1471334754716" expanded="true" signature="1684:1829" ph="INSERT INTO `${self::$table}`... " />
               </folding>
             </state>
           </provider>
@@ -82,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogItemWithIP.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LogItemWithIP.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/LogItemWithIP.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="83" column="8" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
+            <state relative-caret-position="85">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -115,8 +112,8 @@
       <file leaf-file-name="LogView.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/LogView.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="259" column="8" selection-start-line="259" selection-start-column="8" selection-end-line="259" selection-end-column="8" />
+            <state relative-caret-position="442">
+              <caret line="83" column="32" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
               <folding>
                 <marker date="1471263243800" expanded="true" signature="800:1032" ph="..." />
                 <marker date="1471263243800" expanded="true" signature="841:1019" ph="..." />
@@ -167,13 +164,13 @@
         <option value="$PROJECT_DIR$/view/navView.php" />
         <option value="$PROJECT_DIR$/Logger.php" />
         <option value="$PROJECT_DIR$/model/LogItem.php" />
-        <option value="$PROJECT_DIR$/example.php" />
         <option value="$PROJECT_DIR$/model/LogCollection.php" />
         <option value="$PROJECT_DIR$/view/NavView.php" />
         <option value="$PROJECT_DIR$/view/LogView.php" />
         <option value="$PROJECT_DIR$/controller/LogManager.php" />
-        <option value="$PROJECT_DIR$/model/LogDAL.php" />
         <option value="$PROJECT_DIR$/model/LogItemWithIP.php" />
+        <option value="$PROJECT_DIR$/example.php" />
+        <option value="$PROJECT_DIR$/model/LogDAL.php" />
       </list>
     </option>
   </component>
@@ -359,12 +356,12 @@
       <workItem from="1470236179654" duration="5363000" />
       <workItem from="1470325593167" duration="6057000" />
       <workItem from="1470589265659" duration="38395000" />
-      <workItem from="1470834020346" duration="79576000" />
+      <workItem from="1470834020346" duration="84530000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129391000" />
+    <option name="totallyTimeSpent" value="134345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -453,11 +450,9 @@
         <state relative-caret-position="306">
           <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
           <folding>
-            <marker date="1471261366027" expanded="true" signature="504:517" ph="SELECT * FRO... " />
-            <marker date="1471261366027" expanded="true" signature="504:518" ph="SELECT * FRO... ${$stmt = $this-&gt;database-&gt;prepare(&quot;SELECT * FROM &quot; . self::$table)}" />
-            <marker date="1471261366027" expanded="true" signature="1353:1365" ph="INSERT INTO " />
-            <marker date="1471261366027" expanded="true" signature="1353:1382" ph="INSERT INTO " />
-            <marker date="1471261366027" expanded="true" signature="1353:1462" ph="INSERT INTO ${self::$table}... " />
+            <marker date="1471334754716" expanded="true" signature="504:517" ph="SELECT * FRO... " />
+            <marker date="1471334754716" expanded="true" signature="504:518" ph="SELECT * FRO... ${$stmt = $this-&gt;database-&gt;prepare(&quot;SELECT * FROM &quot; . self::$table)}" />
+            <marker date="1471334754716" expanded="true" signature="1684:1829" ph="INSERT INTO `${self::$table}`... " />
           </folding>
         </state>
       </provider>
@@ -648,14 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/LogCollection.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -680,10 +667,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controller/LogManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="97" column="54" selection-start-line="97" selection-start-column="54" selection-end-line="97" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/LogView.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="259" column="8" selection-start-line="259" selection-start-column="8" selection-end-line="259" selection-end-column="8" />
+        <state relative-caret-position="442">
+          <caret line="83" column="32" selection-start-line="83" selection-start-column="32" selection-end-line="83" selection-end-column="32" />
           <folding>
             <marker date="1471263243800" expanded="true" signature="800:1032" ph="..." />
             <marker date="1471263243800" expanded="true" signature="841:1019" ph="..." />
@@ -721,33 +716,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/LogManager.php">
+    <entry file="file://$PROJECT_DIR$/example.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="97" column="54" selection-start-line="97" selection-start-column="54" selection-end-line="97" selection-end-column="54" />
+        <state relative-caret-position="289">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/LogItemWithIP.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/LogDAL.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="56" column="40" selection-start-line="56" selection-start-column="40" selection-end-line="56" selection-end-column="40" />
+        <state relative-caret-position="228">
+          <caret line="57" column="39" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
           <folding>
-            <marker date="1471261366027" expanded="true" signature="504:517" ph="SELECT * FRO... " />
-            <marker date="1471261366027" expanded="true" signature="504:518" ph="SELECT * FRO... ${$stmt = $this-&gt;database-&gt;prepare(&quot;SELECT * FROM &quot; . self::$table)}" />
-            <marker date="1471261366027" expanded="true" signature="1353:1365" ph="INSERT INTO " />
-            <marker date="1471261366027" expanded="true" signature="1353:1382" ph="INSERT INTO " />
-            <marker date="1471261366027" expanded="true" signature="1353:1462" ph="INSERT INTO ${self::$table}... " />
+            <marker date="1471334754716" expanded="true" signature="504:517" ph="SELECT * FRO... " />
+            <marker date="1471334754716" expanded="true" signature="504:518" ph="SELECT * FRO... ${$stmt = $this-&gt;database-&gt;prepare(&quot;SELECT * FROM &quot; . self::$table)}" />
+            <marker date="1471334754716" expanded="true" signature="1684:1829" ph="INSERT INTO `${self::$table}`... " />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/LogItemWithIP.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="83" column="8" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>

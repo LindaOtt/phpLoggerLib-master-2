@@ -31,9 +31,9 @@ class LogDAL {
             throw new \Exception($this->database->error);
         }
         $stmt->execute();
-        $stmt->bind_result($pk, $ip, $logMessageString, $sessionid, $datetime);
+        $stmt->bind_result($pk, $ip, $logMessageString, $trace, $logThisObject, $sessionid, $datetime);
         while ($stmt->fetch()) {
-            $this->addLogItemToArray($logMessageString, $includeTrace=false, $logThisObject = null, $ip, $sessionid, $datetime);
+            $this->addLogItemToArray($logMessageString, $trace, $logThisObject, $ip, $sessionid, $datetime);
         }
         $this->navView = new NavView();
 
@@ -45,19 +45,26 @@ class LogDAL {
         $sessionid = $logitem->m_sessionid;
         $message = $logitem->m_message;
         $datetime = $logitem->m_dateTime;
+        $debugbacktrace = $logitem->m_debug_backtrace;
+        $logThisObject = $logitem->m_object;
+        if ($logitem->m_debug_backtrace != null) {
+            $debugbacktrace = serialize($debugbacktrace);
+        }
+        if ($logitem->m_object != null) {
+            $logThisObject = serialize($logThisObject);
+        }
 
-        $insertstmt = "INSERT INTO `". self::$table . "` (`pk`, `ip`, `message`, `sessionid`, `datetime`)
-				VALUES (?, ?, ?, ?, ?)";
+        $insertstmt = "INSERT INTO `". self::$table . "` (`pk`, `ip`, `message`, `trace`, `logobject`, `sessionid`, `datetime`)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         $stmt = $this->database->prepare($insertstmt);
         if ($stmt === FALSE) {
             throw new \Exception($this->database->error);
         }
 
         $pk = NULL;
-        $bindparamstmt = "'ssss', $pk, $ipAddress, $message, $sessionid, $datetime";
-        echo "bindparamstmt: $bindparamstmt<br>";
-        //$stmt->bind_param($bindparamstmt);
-        $stmt->bind_param('issss', $pk, $ipAddress, $message, $sessionid, $datetime);
+
+        $stmt->bind_param('issssss', $pk, $ipAddress, $message, $debugbacktrace, $logThisObject, $sessionid, $datetime);
 
         if ($stmt->execute()) {
             $this->message = "Message added to database.";

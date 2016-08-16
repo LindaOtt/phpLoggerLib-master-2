@@ -74,14 +74,18 @@ class LogItemWithIP {
 	public function __construct($logMessageString, $includeTrace = false, $logThisObject = null, $ip, $sessionid, $datetime) {
 
         if (is_string($logMessageString) == false || strlen($logMessageString) == 0)
-            throw new NoMessageException();
+            //throw new NoMessageException();
+            $logThisObject = new NoMessageException();
         if (is_string(empty($ip)) || strlen($ip) == 0)
-            throw new NoIpException();
+            //throw new NoIpException();
+            $logThisObject = new NoIpException();
         if (is_string($sessionid) == false || strlen($sessionid) == 0)
-            throw new NoSessionIdException();
+            //throw new NoSessionIdException();
+            $logThisObject = new NoSessionIdException();
         if (is_string($datetime) == false || strlen($datetime) == 0)
-            throw new NoDateTimeException();
-        
+            //throw new NoDateTimeException();
+            $logThisObject = new NoDateTimeException();
+
 
 	    $this->m_dateTime = $datetime;
 
