@@ -49,10 +49,11 @@ class LogDAL {
         $datetime = $logitem->m_dateTime;
         $debugbacktrace = $logitem->m_debug_backtrace;
         $logThisObject = $logitem->m_object;
-
-        if ($logitem->m_object != null && $logitem->m_debug_backtrace != null) {
-            $logThisObject = serialize($logThisObject);
+        if ($logitem->m_debug_backtrace != null) {
             $debugbacktrace = serialize($debugbacktrace);
+        }
+        if ($logitem->m_object != null) {
+            //$logThisObject = serialize($logThisObject);
         }
 
         $insertstmt = "INSERT INTO `". self::$table . "` (`pk`, `ip`, `message`, `trace`, `logobject`, `sessionid`, `datetime`)
@@ -72,7 +73,8 @@ class LogDAL {
             return $this->message;
         }
         else {
-            $this->message = "Unable to add message to database";
+            $this->message = "Unable to add message to database. ";
+            $this->message .= $stmt->error;
             return $this->message;
         }
 

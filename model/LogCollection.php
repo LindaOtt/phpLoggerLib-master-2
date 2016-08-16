@@ -2,6 +2,8 @@
 
 namespace logger;
 
+use \Exception;
+
 require_once("LogItem.php");
 require_once("LogItemWithIP.php");
 
@@ -35,7 +37,12 @@ class LogCollection {
 
 	public function getSortedIpList() {
 	    if (empty($this->logArray)) {
-	        throw new Exception('There are no recorded log items.');
+	        try {
+	            throw new \Exception('There are no recorded log items.');
+            }
+            catch ( Exception $e) {
+                echo $e->getMessage();
+            }
         }
         else {
             $counter = 0;

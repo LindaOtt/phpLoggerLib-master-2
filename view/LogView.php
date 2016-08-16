@@ -208,15 +208,52 @@ class LogView {
         $ret = "<h2>Session: $viewedSession</h2>
         <table border='1'>
         <tr>
+        <th>Ip address</th>
         <th>Session ID</th>
+        <th>Trace</th>
+        <th>Log Item</th>
         <th>Time</th>
         </tr>";
         foreach ($this->log->getList() as $item) {
             date_default_timezone_set('Europe/Stockholm');
             if ($viewedSession==$item->m_sessionid) {
+
+                if ($item->m_debug_backtrace != null) {
+                    $debug = "
+					 <ul>";
+                    foreach ($item->m_debug_backtrace AS $key => $row) {
+
+                        //the two topmost items are part of the logger
+                        //skip those
+                        if ($key < 2) {
+                            continue;
+                        }
+                        $key = $key - 2;
+                        $debug .= "<li> $key " . LogItem::cleanFilePath($row['file']) . " Line : " . $row["line"] .  "</li>";
+                    }
+                    $debug .= "</ul>";
+                } else {
+                    $debug = "";
+                }
+
+                //$object = unserialize($item->m_object);
+                /*
+                $fixed_object = preg_replace_callback ( '!s:(d+):"(.*?)";!',
+                    function($match) {
+                        return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                    },
+                    unserialize($item->m_object) );
+
+
+*/
+
+                $object = print_r($item->m_object, true);
                 $ret .=
                     "<tr>
+                    <td>". $item->m_ip ."</td>
                     <td>". $item->m_sessionid ."</td>
+                    <td>". $debug ."</td>
+                    <td><pre>". $object ."</pre></td>
                     <td>". $item->m_dateTime ."</td>
                     </tr>";
             }
