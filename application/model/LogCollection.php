@@ -35,7 +35,11 @@ class LogCollection {
 		return $this->logArray;
 	}
 
-	public function getSortedIpList() {
+
+    /**
+     * @return array with sorted ips
+     */
+    public function getSortedIpList() {
 	    if (empty($this->logArray)) {
 	        try {
 	            throw new \Exception('There are no recorded log items.');
@@ -75,6 +79,5 @@ class LogCollection {
         }
         return $this->sortedIpArrayCounter;
     }
-
 
 }

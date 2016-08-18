@@ -1,6 +1,5 @@
 <?php
 
-//This has no namespace for convenience, it should really be a common module
 namespace model;
 
 class NoMessageException extends \Exception {};

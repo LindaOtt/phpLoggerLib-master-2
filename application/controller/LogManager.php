@@ -1,11 +1,12 @@
 <?php
 namespace controller;
 
-require_once("./model/LogCollection.php");
-require_once("./model/LogItemWithIP.php");
-require_once("./model/LogDAL.php");
-require_once("./view/LogView.php");
-require_once("./view/NavView.php");
+define('__ROOT__', dirname(dirname(__FILE__)));
+require_once(__ROOT__.'/model/LogCollection.php');
+require_once(__ROOT__.'/model/LogItemWithIP.php');
+require_once(__ROOT__.'/model/LogDAL.php');
+require_once(__ROOT__.'/view/LogView.php');
+require_once(__ROOT__.'/view/NavView.php');
 
 
 class LogManager {
@@ -33,6 +34,11 @@ class LogManager {
 
     }
 
+
+    /**
+     * Checks which user case is active,
+     * sets state in view
+     */
     public function handleInput() {
 
         //Starting session
@@ -40,53 +46,40 @@ class LogManager {
 
         switch(true) {
             case $this->logView->viewAllIps():
-                echo $this->showAllIps();
+                //$this->showAllIps;
+                $this->logView->setShowState("viewAllIps");
                 break;
             case $this->logView->viewOneIp():
-                echo $this->showOneIp();
+                //$this->showOneIp();
+                $this->logView->setShowState("viewOneIp");
                 break;
             case $this->logView->viewOneSession():
-                echo $this->showOneSession();
+                //echo $this->showOneSession();
+                $this->logView->setShowState("showOneSession");
                 break;
             case $this->logView->logMessage():
-                echo $this->showMsgForm();
+                //echo $this->showMsgForm();
+                $this->logView->setShowState("showMessageForm");
                 break;
             case $this->logView->submitMessage():
-                $this->addMessageToDb();
+                if ($this->addMessageToDb() == true) {
+                    $this->logView->setShowState("addedMessage");
+                }
+                else {
+                    $this->logView->setShowState("failedMessage");
+                }
                 break;
             default:
-                echo $this->showNavList();
+                $this->logView->setShowState("showNavList");
         }
 
         $this->mysqli->close();
     }
 
-    public function generateOutput() {
-        return $this->view;
-    }
 
-    public function showAllIps() {
-        //Get the log collection
-        return $this->logView->getIpView();
-    }
-
-    public function showOneIp() {
-        return $this->logView->getOneIpView();
-    }
-
-    public function showOneSession() {
-        return $this->logView->getOneSessionView();
-    }
-
-    public function showMsgForm() {
-        //Get the form that allows the user to add messages
-        return $this->logView->getMsgFormHTML();
-    }
-
-    public function showNavList() {
-        return $this->logView->getNavList();
-    }
-
+    /**
+     * @return bool true if added to db | error message if not added to db
+     */
     public function addMessageToDb() {
 
         //Get the message from view
@@ -96,10 +89,22 @@ class LogManager {
         $datetime = $this->logView->getTime();
         $this->logItemWithIP = new \model\LogItemWithIP($message, true, null, $ip, $sessionid, $datetime);
         $sentmessage = $this->logDAL->addLogItemToDb($this->logItemWithIP);
-        if ($sentmessage != null) {
-            $this->logView->showSentMessage($sentmessage);
+        if ($sentmessage == true) {
+            return true;
+        }
+        else {
+            return false;
         }
 
+    }
+
+
+    /**
+     * @return string
+     */
+    public function generateOutput() {
+        $this->view = $this->logView->getHTML();
+        return $this->view;
     }
 
 }

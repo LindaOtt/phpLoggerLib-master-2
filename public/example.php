@@ -3,7 +3,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once("Logger.php");
-require_once("controller\LogManager.php");
+$root =  dirname(dirname(__FILE__));
+require_once($root.'/application/controller/LogManager.php');
+require_once($root.'/application/view/HTMLView.php');
 
 function loggStuff() {
 	loggHeader("A header");
@@ -12,11 +14,14 @@ function loggStuff() {
 	loggThis("include an object", new \Exception("foo exception"), false);
 }
 
-
-
 //Try out the log manager
 $logManager = new \controller\LogManager();
 $logManager->handleInput();
+
+$view = array();
+$view = $logManager->generateOutput();
+$htmlView = new \view\HTMLView("utf-8");
+echo $htmlView->getHTMLPage("Assignment 4 Log Manager", $view);
 
 //loggStuff();
 
@@ -26,7 +31,3 @@ $logManager->handleInput();
 
 //show with superglobals
 //echoLog();
-
-
-
-

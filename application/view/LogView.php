@@ -2,6 +2,10 @@
 
 namespace view;
 
+/**
+ * Class LogView
+ * @package view
+ */
 class LogView {
 
 	private $log;
@@ -11,10 +15,22 @@ class LogView {
     private static $addMsgURL = "addmsg";
     private static $submitPostID = "submit";
     private static $MessageID = "message";
+    private $showState;
+    private $title;
+    private $view;
 
 	public function __construct(\model\LogCollection $log) {
 		$this->log = $log;
+        $this->showState = "showNavList";
 	}
+
+
+    /**
+     * @param $state
+     */
+    public function setShowState($state) {
+	    $this->showState = $state;
+    }
 
 	/**
 	* @param boolean $doDumpSuperGlobals
@@ -135,22 +151,37 @@ class LogView {
         return isset($_GET[self::$viewIpsURL]) == true;
     }
 
+    /**
+     * @return bool
+     */
     public function viewOneIp() {
         return isset($_GET[self::$viewOneIpURL]) == true;
     }
 
+    /**
+     * @return bool
+     */
     public function viewOneSession() {
         return isset($_GET[self::$viewOneSessionURL]) == true;
     }
 
+    /**
+     * @return bool
+     */
     public function logMessage() {
         return isset($_GET[self::$addMsgURL]) == true;
     }
 
+    /**
+     * @return bool
+     */
     public function submitMessage() {
         return isset($_POST[self::$submitPostID]) == true;
     }
 
+    /**
+     * @return string
+     */
     public function getIpView() {
 
         $sessionsPerIpList = $this->log->getSortedIpList();
@@ -175,6 +206,9 @@ class LogView {
     }
 
 
+    /**
+     * @return string
+     */
     public function getOneIpView() {
         $viewedIP=$_GET[self::$viewOneIpURL];
 
@@ -203,6 +237,10 @@ class LogView {
         return $ret;
     }
 
+
+    /**
+     * @return string
+     */
     public function getOneSessionView() {
         $viewedSession=$_GET[self::$viewOneSessionURL];
         $ret = "<h2>Session: $viewedSession</h2>
@@ -265,11 +303,19 @@ class LogView {
         return $ret;
     }
 
+
+    /**
+     * @return mixed
+     */
     public function getIpAddress() {
         $ip = $_SERVER['SERVER_ADDR'];
         return $ip;
     }
 
+
+    /**
+     * @return string
+     */
     public function getSessionId() {
         $sessionid = session_id();
         return $sessionid;
@@ -287,10 +333,18 @@ class LogView {
         return $ret;
     }
 
+
+    /**
+     * @return mixed
+     */
     public function getMessage() {
         return $_POST[self::$MessageID];
     }
 
+
+    /**
+     * @return bool|string
+     */
     public function getTime() {
         list($usec, $sec) = explode(" ", microtime());
         date_default_timezone_set('Europe/Stockholm');
@@ -298,12 +352,59 @@ class LogView {
         return $date;
     }
 
-    public function showSentMessage($message) {
-        echo "<p>$message</p>";
-        echo $this->getLinkToMainPage();
-    }
 
+    /**
+     * @return string
+     */
     public function getLinkToMainPage() {
         return "<p><a href=''>Back</a></p>";
     }
+
+
+    /**
+     * @param $message
+     * @return string
+     */
+    public function showSentMessage($message) {
+        $ret ="<p>$message</p>
+        <p>" . $this->getLinkToMainPage() ."</p>";
+        return $ret;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getHTML() {
+
+        switch($this->showState) {
+            case "showNavList":
+                $this->view = $this->getNavList();
+                break;
+            case "viewAllIps":
+                $this->view = $this->getIpView();
+                break;
+            case "viewOneIp":
+                $this->view = $this->getOneIpView();
+                break;
+            case "showOneSession":
+                $this->view = $this->getOneSessionView();
+                break;
+            case "showMessageForm":
+                $this->view = $this->getMsgFormHTML();
+                break;
+            case "addedMessage":
+                $message = "Message was added to the database";
+                $this->view = $this->showSentMessage($message);
+                break;
+            case "failedMessage":
+                $message = "Unable to add message to the database.";
+                $this->view = $this->showSentMessage($message);
+                break;
+            default:
+                $this->view = $this->getNavList();
+        }
+        return $this->view;
+    }
+
 }

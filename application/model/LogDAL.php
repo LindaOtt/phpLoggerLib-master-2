@@ -2,8 +2,9 @@
 
 namespace model;
 
-require_once("./view/NavView.php");
-require_once("./model/LogCollection.php");
+//define('__ROOT__', dirname(dirname(__FILE__)));
+require_once(__ROOT__.'./view/NavView.php');
+require_once(__ROOT__.'./model/LogCollection.php');
 require_once("LogItemWithIP.php");
 
 class LogDAL {
@@ -42,6 +43,12 @@ class LogDAL {
         return $this->logCollection;
     }
 
+
+    /**
+     * @param LogItemWithIP $logitem
+     * @return bool - true if added to db, false if not
+     * @throws \Exception
+     */
     public function addLogItemToDb(LogItemWithIP $logitem) {
         $ipAddress = $logitem->m_ip;
         $sessionid = $logitem->m_sessionid;
@@ -51,9 +58,6 @@ class LogDAL {
         $logThisObject = $logitem->m_object;
         if ($logitem->m_debug_backtrace != null) {
             $debugbacktrace = serialize($debugbacktrace);
-        }
-        if ($logitem->m_object != null) {
-            //$logThisObject = serialize($logThisObject);
         }
 
         $insertstmt = "INSERT INTO `". self::$table . "` (`pk`, `ip`, `message`, `trace`, `logobject`, `sessionid`, `datetime`)
@@ -69,16 +73,14 @@ class LogDAL {
         $stmt->bind_param('issssss', $pk, $ipAddress, $message, $debugbacktrace, $logThisObject, $sessionid, $datetime);
 
         if ($stmt->execute()) {
-            $this->message = "Message added to database.";
-            return $this->message;
+            return true;
         }
         else {
-            $this->message = "Unable to add message to database. ";
-            $this->message .= $stmt->error;
-            return $this->message;
+            //$errormsg = $stmt->error;
+            //throw new \Exception($errormsg);
+            return false;
         }
 
-        return null;
     }
 
 

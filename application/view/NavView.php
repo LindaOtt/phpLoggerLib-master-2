@@ -5,10 +5,9 @@ class NavView {
 
     private $ipAddress;
 
-    public function __construct() {
-
-    }
-
+    /**
+     * Starts a new session each 15 minutes
+     */
     public function handleSession() {
         session_start();
         if (!isset($_SESSION['timesessionstarted'])) {

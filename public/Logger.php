@@ -1,7 +1,7 @@
 <?php
 //This has no namespace for convenience, it should really be a common module
-require_once("model/LogCollection.php");
-require_once("view/LogView.php");
+require_once("../application/model/LogCollection.php");
+require_once("../application/view/LogView.php");
 
 
 //uses globals for convenience
@@ -38,6 +38,6 @@ function loggHeader($logMessageString) {
 */
 function echoLog($doDumpSuperGlobals = true) {
 	global $logCollection;
-	$logView = new \logger\LogView($logCollection);
+	$logView = new \view\LogView($logCollection);
 	echo $logView->getDebugData($doDumpSuperGlobals);
 }
