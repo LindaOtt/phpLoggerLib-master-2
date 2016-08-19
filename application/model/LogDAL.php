@@ -3,8 +3,8 @@
 namespace model;
 
 //define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__.'./view/NavView.php');
-require_once(__ROOT__.'./model/LogCollection.php');
+require_once(__ROOT__.'/view/NavView.php');
+require_once(__ROOT__.'/model/LogCollection.php');
 require_once("LogItemWithIP.php");
 
 class LogDAL {
