@@ -186,7 +186,7 @@ class LogView {
 
         $sessionsPerIpList = $this->log->getSortedIpList();
         $ret = "<h2>All ips</h2>
-        <table border='1'>
+        <table>
         <tr>
         <th>Ip address</th>
         <th>Number of sessions</th>
@@ -274,7 +274,9 @@ class LogView {
                     $debug = "";
                 }
 
+
                 $object = print_r($item->m_object, true);
+                $object = stripslashes(preg_replace('/\\\{2,}/', '', $object));
                 $ret .=
                     "<tr>
                     <td>". $item->m_ip ."</td>

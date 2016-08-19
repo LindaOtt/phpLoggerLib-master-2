@@ -1,3 +1,15 @@
 body {
     font-family: Helvetica, Arial, sans-serif;
 }
+
+td {
+    border: 1px solid black;
+    vertical-align: top;
+    width: 600px;
+}
+
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
