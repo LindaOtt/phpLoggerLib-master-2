@@ -282,7 +282,7 @@ class LogView {
                     <td>". $item->m_ip ."</td>
                     <td>". $item->m_sessionid ."</td>
                     <td>". $debug ."</td>
-                    <td><pre>". $object ."</pre></td>
+                    <td><div class='objecttext'><pre>". $object ."</pre></div></td>
                     <td>". $item->m_dateTime ."</td>
                     </tr>";
             }

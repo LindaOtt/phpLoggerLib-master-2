@@ -21,7 +21,7 @@ class LogManager {
     public function __construct() {
 
 
-        $this->mysqli = new \mysqli("localhost", "root", "root", "logs");
+        $this->mysqli = new \mysqli("localhost", "root", "root", "Logs");
         if (mysqli_connect_errno()) {
             printf("Connect failed: %s\n", mysqli_connect_error());
             exit();

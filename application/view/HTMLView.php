@@ -24,10 +24,32 @@ class HTMLView {
         <head>
           <meta charset=\"" . $this->charset . "\">
           <link rel='stylesheet' href='..\public\style.css'>
+         
           <title>$title</title>
         </head>
         <body>
+        
           $body
+          
+           <script type='text/javascript'>
+          
+     
+            var el = document.getElementsByClassName('objecttext');
+for (var i=0;i<el.length; i++) {
+    el[i].onclick = function() {
+            if (this.style.height <= '4em') {
+                this.style.height = 'auto';
+                this.className += ' objectclicked';
+            }
+            else {
+                this.style.height = '4em';
+                 this.className = 'objecttext';
+            }
+            
+          }
+}
+
+          </script>
         </body>
       </html>";
     }
